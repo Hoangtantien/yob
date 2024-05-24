@@ -1,0 +1,121 @@
+#app{
+    display: flex;
+}
+.side_bar-header a{
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid #ffffff6e;
+}
+.menu-list{
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+}
+.menu-item{
+    list-style-type: none;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ffffff6e;
+}
+.menu-item a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}
+.menu-link svg {
+    width: 13px;
+    fill: #fff;
+}
+.menu-list .has-child{
+    position: relative;
+}
+.menu-list .has-child::after{
+    position: absolute;
+    content: "";
+    right: 25px;
+    top: 19px;
+    border: solid rgb(255, 255, 255);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.sidebar{
+    flex: 0 0 280px;
+    height: 100vh;
+    background-color: #d28131;
+}
+.main{
+    flex: auto;
+}
+.header{
+    height: 110px;
+    padding-right: 19px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.logo{
+    height: 80px;
+    width: 200px;
+    object-fit: cover;
+
+}
+.header_wrap{
+    position: relative;
+    cursor: pointer;
+}
+.user-control-menu{
+    position: absolute;
+    top: 31px;
+    /* display: none; */
+    /* opacity: 0; */
+    transition: all 0.5s;
+}
+.header_wrap:hover > .user-control-menu{
+    /* display: block; */opacity: 1
+    ;
+}
+.sub-menu {
+    margin-top: 5px;
+    display: none;
+}
+.sub-menu li{
+    list-style-type: none;
+    padding:5px 0;
+}
+.cs-form{
+    width: 500px;
+    margin: 20px auto;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+.cs-btn{
+    margin: 0 auto;
+    display: flex;
+}
+.cs-container{
+    width: 800px;
+    margin-top: 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+    border-radius: 10px;    
+}
+.user-name img{
+    width: 45px;
+    border-radius: 50%;
+    height: 45px
+}

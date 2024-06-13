@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClassController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,7 @@ Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// user
 Route::get('/user/create', [App\Http\Controllers\UserController::class, 'showCreate'])->name('user.create');
 Route::post('/user/create/store', [App\Http\Controllers\UserController::class, 'createStore'])->name('user.create.store');
 Route::get('/user/update/{id}', [App\Http\Controllers\UserController::class, 'showUpdate'])->name('user.update');
@@ -29,4 +31,18 @@ Route::post('/user/update/store/{id}', [App\Http\Controllers\UserController::cla
 Route::get('/user/list/', [App\Http\Controllers\UserController::class, 'showList'])->name('user.list');
 Route::delete('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
 
+// classes
+Route::get('/class/create',[App\Http\Controllers\ClassController::class, 'showCreate'])->name('class.create');
+Route::post('/class/create/store', [App\Http\Controllers\ClassController::class, 'createStore'])->name('class.create.store');
+Route::get('/class/list',[App\Http\Controllers\ClassController::class, 'showList'])->name('class.list');
+Route::delete('/class/delete/{id}', [App\Http\Controllers\ClassController::class, 'delete'])->name('class.delete');
+Route::get('/class/update/{id}', [App\Http\Controllers\ClassController::class, 'showUpdate'])->name('class.update');
+Route::post('/class/update/store/{id}', [App\Http\Controllers\ClassController::class, 'updateStore'])->name('class.update.store');
 
+//courts
+Route::get('/court/create',[App\Http\Controllers\CourtController::class, 'showCreate'])->name('court.create');
+Route::post('/court/create/store', [App\Http\Controllers\CourtController::class, 'createStore'])->name('court.create.store');
+Route::get('/court/list',[App\Http\Controllers\CourtController::class, 'showList'])->name('court.list');
+Route::delete('/court/delete/{id}', [App\Http\Controllers\CourtController::class, 'delete'])->name('court.delete');
+Route::get('/court/update/{id}', [App\Http\Controllers\CourtController::class, 'showUpdate'])->name('court.update');
+Route::post('/court/update/store/{id}', [App\Http\Controllers\CourtController::class, 'updateStore'])->name('court.update.store');

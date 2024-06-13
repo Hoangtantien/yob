@@ -23,7 +23,10 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:6',
                 'name' => 'required|string|max:255',
-                'type' => 'required|integer'
+                'phone' => 'required|string|max:255',
+                'type' => 'required|integer',
+                'address' => 'required|string|max:255',
+                'dob' => 'required|date'
             ]);
 
             // Create the user
@@ -32,7 +35,9 @@ class UserController extends Controller
             $user->password = Hash::make($request->password); // Hash the password            
             $user->name = $request->name;
             $user->phone = $request->phone;
-            $user->type = $request->type; // Assuming you have a role field in your users table
+            $user->address = $request->address;
+            $user->type = $request->type;
+            $user->dob = $request->dob; // Assuming you have a role field in your users table
             $user->save();
 
             // Redirect or respond as necessary
@@ -57,6 +62,7 @@ class UserController extends Controller
             $request->validate([
                 'email' => 'required|email|unique:users,email,' . $id,
                 'name' => 'required|string|max:255',
+                'phone' => 'required|string|max:255',
                 'type' => 'required|integer'
             ]);
 
@@ -68,6 +74,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->type = $request->type;
             $user->phone = $request->phone;
+            $user->address = $request->address;
             $user->save();
 
             // Redirect with success message
@@ -98,7 +105,6 @@ class UserController extends Controller
             // Thêm thông báo xóa thành công (tuỳ chọn)
             return redirect()->route('user.list')->with('success', 'Người dùng đã được xóa thành công.');
         }
-    
         return redirect()->route('user.list')->with('error', 'Người dùng không tồn tại.');
     }
 }

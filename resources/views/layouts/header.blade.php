@@ -5,8 +5,8 @@
             <img src="{{asset('images/avatar.webp')}}" alt="">
         </div>
         <div class="user-control-menu">
-            <a href=""> profile</a>
-            <a class="dropdown-item" href="{{ route('logout') }}"
+            <a href="" class="menu-link"> profile</a>
+            <a class="dropdown-item menu-link" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
              {{ __('Logout') }}

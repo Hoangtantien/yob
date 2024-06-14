@@ -46,3 +46,14 @@ Route::get('/court/list',[App\Http\Controllers\CourtController::class, 'showList
 Route::delete('/court/delete/{id}', [App\Http\Controllers\CourtController::class, 'delete'])->name('court.delete');
 Route::get('/court/update/{id}', [App\Http\Controllers\CourtController::class, 'showUpdate'])->name('court.update');
 Route::post('/court/update/store/{id}', [App\Http\Controllers\CourtController::class, 'updateStore'])->name('court.update.store');
+
+
+
+// Short session
+
+Route::get('/short-session/create',[App\Http\Controllers\ShortSessionController::class, 'showCreate'])->name('short-session.create');
+Route::post('/short-session/create/store', [App\Http\Controllers\ShortSessionController::class, 'createStore'])->name('short-session.create.store');
+Route::get('/short-session/list',[App\Http\Controllers\ShortSessionController::class, 'showList'])->name('short-session.list');
+Route::delete('/short-session/delete/{id}', [App\Http\Controllers\ShortSessionController::class, 'delete'])->name('short-session.delete');
+Route::get('/short-session/update/{id}', [App\Http\Controllers\ShortSessionController::class, 'showUpdate'])->name('short-session.update');
+Route::post('/short-session/update/store/{id}', [App\Http\Controllers\ShortSessionController::class, 'updateStore'])->name('short-session.update.store');

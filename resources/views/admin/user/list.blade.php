@@ -22,7 +22,6 @@
               <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">SĐT</th>
-              <th scope="col">Địa chỉ</th>
               <th scope="col">Chức vụ</th>
               <th scope="col">thao tác</th>
           </tr>
@@ -34,7 +33,6 @@
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->phone }}</td>
-                  <td>{{ $user->address }}</td>
                     <td>
                   
                     @switch($user->type)

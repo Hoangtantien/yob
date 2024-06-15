@@ -119,7 +119,7 @@ d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128
                 <a href="{{ route('short-session.create') }}" class="sub-menu-link">Thêm ca học</a>
             </li>
             <li class="sub-menu-item">
-                <a href="" class="sub-menu-link">Danh sách ca học</a>
+                <a href="{{ route('short-session.list') }}" class="sub-menu-link">Danh sách ca học</a>
             </li>
             
         </ul>

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
     //
-    public function showCreate(){
+    public function showCreate()
+    {
 
         return view('admin.user.create');
     }
@@ -25,8 +26,6 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'phone' => 'required|string|max:255',
                 'type' => 'required|integer',
-                'address' => 'required|string|max:255',
-                'dob' => 'required|date'
             ]);
 
             // Create the user
@@ -37,6 +36,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->type = $request->type;
+            $user->base_salary = $request->base_salary;
             $user->dob = $request->dob; // Assuming you have a role field in your users table
             $user->save();
 
@@ -50,10 +50,11 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'There was an error creating the user. Please try again.');
         }
     }
-    public function showUpdate($id){
+    public function showUpdate($id)
+    {
         $user = User::findOrFail($id);
         $data['user'] = $user;
-            return view('admin.user.update',$data);
+        return view('admin.user.update', $data);
     }
     public function updateStore(Request $request, $id)
     {
@@ -73,6 +74,8 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->name = $request->name;
             $user->type = $request->type;
+            $user->base_salary = $request->base_salary;
+            $user->dob = $request->dob; // Assuming you have a role field in your users table
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->save();
@@ -89,7 +92,7 @@ class UserController extends Controller
     }
     public function showList()
     {
-        $users = User::all(); // Fetch all users from the database
+        $users = User::paginate(6); // Fetch all users from the database
 
         return view('admin.user.list', compact('users'));
     }
@@ -97,11 +100,11 @@ class UserController extends Controller
     {
         // Tìm người dùng theo id
         $user = User::find($id);
-    
+
         if ($user) {
             // Xóa người dùng
             $user->delete();
-    
+
             // Thêm thông báo xóa thành công (tuỳ chọn)
             return redirect()->route('user.list')->with('success', 'Người dùng đã được xóa thành công.');
         }

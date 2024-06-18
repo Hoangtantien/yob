@@ -57,3 +57,12 @@ Route::get('/short-session/list',[App\Http\Controllers\ShortSessionController::c
 Route::delete('/short-session/delete/{id}', [App\Http\Controllers\ShortSessionController::class, 'delete'])->name('short-session.delete');
 Route::get('/short-session/update/{id}', [App\Http\Controllers\ShortSessionController::class, 'showUpdate'])->name('short-session.update');
 Route::post('/short-session/update/store/{id}', [App\Http\Controllers\ShortSessionController::class, 'updateStore'])->name('short-session.update.store');
+
+
+// classes
+Route::get('/students/create',[App\Http\Controllers\StudentController::class, 'showCreate'])->name('students.create');
+Route::post('/students/create/store', [App\Http\Controllers\StudentController::class, 'createStore'])->name('students.create.store');
+Route::get('/students/list',[App\Http\Controllers\StudentController::class, 'showList'])->name('students.list');
+Route::delete('/students/delete/{id}', [App\Http\Controllers\StudentController::class, 'delete'])->name('students.delete');
+Route::get('/students/update/{id}', [App\Http\Controllers\StudentController::class, 'showUpdate'])->name('students.update');
+Route::post('/students/update/store/{id}', [App\Http\Controllers\StudentController::class, 'updateStore'])->name('students.update.store');

@@ -98,7 +98,7 @@
     padding: 5px 0;
 }
 .cs-form {
-    width: 500px;
+    width: 800px;
     margin: 20px auto;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 20px;
@@ -120,4 +120,60 @@
     width: 45px;
     border-radius: 50%;
     height: 45px;
+}
+.btn-box{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.required{
+    color: red;
+}
+.alert {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    animation: slide-out 1s forwards; /* Apply the animation */
+    opacity: 1;
+    animation-delay: 3s;
+}
+@keyframes slide-out {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+.box-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.box-header-left{
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+}
+.box-header-right{
+    display: flex;
+}
+.box-header-left a{
+    padding: 3px 12px;
+}
+.box-header-right button svg{
+    width: 16px;
+    fill: #fff;
+}
+.box-header-right button {
+    border-top-left-radius:0px ;
+    border-bottom-left-radius:0px ;
+}
+.box-header-right input {
+    border-top-right-radius:0px ;
+    border-bottom-right-radius:0px ;
 }

@@ -2,17 +2,7 @@
 
 @section('content')
     <div class="container">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-        <form action="{{ route('short-session.update.store',$short_session->id) }}" method="post" class="cs-form">
+        <form action="{{ route('short-session.update.store', $short_session->id) }}" method="post" class="cs-form">
             @csrf
             <h5 class="text-center mb-3">
                 Chỉnh sửa ca học
@@ -30,7 +20,10 @@
                 <input type="time" class="form-control" name="end_time" value="{{ $short_session->end_time }}">
             </div>
 
-            <button type="submit" class="btn btn-primary cs-btn">Cập nhật ca học</button>
+            <div class="mb-3 btn-box">
+                <button type="submit" class="btn btn-primary ">Cập nhật ca học</button>
+                <a href="{{ route('short-session.list') }}" class="btn btn-secondary ">Quay lại</a>
+            </div>
         </form>
     </div>
 @endsection

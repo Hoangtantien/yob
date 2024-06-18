@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\ProjectClass;
 use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Models\Student;
+use App\Models\User;
+use App\Models\Court;
 
 class ClassController extends Controller
 {
     public function showCreate(){
-
-        return view('admin.class.create');
+        $students = Student::all();
+        $coachs = User::where('type',2)->get();
+        $courts = Court::all();
+        $data['students'] = $students;
+        $data['courts'] = $courts;
+        $data['coachs'] = $coachs;
+        return view('admin.class.create',$data);
     }
     public function createStore(Request $request)
     {

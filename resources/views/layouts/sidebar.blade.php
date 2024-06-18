@@ -58,6 +58,10 @@ d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128
             <li class="sub-menu-item">
                 <a href="{{route('class.list')}}" class="sub-menu-link">Danh sách lớp học</a>
             </li>
+
+            <li class="sub-menu-item">
+                <a href="{{route('students.list')}}" class="sub-menu-link">Danh sách học sinh</a>
+            </li>
             
         </ul>
     </li>

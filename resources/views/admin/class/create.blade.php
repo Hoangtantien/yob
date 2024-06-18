@@ -2,32 +2,52 @@
 
 @section('content')
     <div class="container">
-        
+
         <form action="{{ route('class.create.store') }}" method="post" class="cs-form">
             @csrf
             <h5 class="text-center mb-3">
                 Thêm lớp học
             </h5>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Tên lớp</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    name="name">
+            <div class="mb-3 row mb-4">
+                <div class="col-12">
+                    <label for="exampleInputEmail1" class="form-label">Tên lớp học</label>
+                    <input type="text" class="form-control" name="name">
+                </div>
+            </div>
+            <div class="mb-3 row mb-4">
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Thời gian bắt đầu</label>
+                    <input type="date" class="form-control" name="start_date">
+                </div>
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Thời gian kết thúc</label>
+                    <input type="date" class="form-control" name="end_date">
+                </div>
+            </div>
+            <div class="mb-3 row mb-4">
+                <div class="col-4">
+                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#coachModal" style="width:100%">
+                        Chọn huấn luyện viên
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#studentModal" style="width:100%">
+                        Chọn học sinh
+                    </div>
+                </div>
+                <div class="col-4">
+                    <select class="form-select" aria-label="Default select example" name="type">
+                        <option selected>---Chọn sân--</option>
+
+                    </select>
+                </div>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Số lượng</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    name="amount">
-            </div>
-            <div class="mb-3">
-                <label for="" class="mb-2"> Sân</label>
-                <select class="form-select" aria-label="Default select example" name="type">
-                    <option selected>---Sân--</option>
-                    {{-- <option value="0" {{$user->type == 0 ? "selected" : ""}}>Admin</option>
-            <option value="1" {{$user->type == 1 ? "selected" : ""}}>Quản lý</option>
-            <option value="2" {{$user->type == 2 ? "selected" : ""}}>HLV</option> --}}
-                </select>
+
             </div>
             <button type="submit" class="btn btn-primary cs-btn">Tạo lớp</button>
+            @include('admin.class.modal-coach')
+            @include('admin.class.modal-student')
         </form>
     </div>
 @endsection

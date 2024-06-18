@@ -31,6 +31,10 @@
     gap: 10px;
     width: fit-content;
 }
+.sub-menu-item a:hover{
+    color: #d4d4d4;
+    
+}
 .menu-link svg {
     width: 13px;
     fill: #fff;

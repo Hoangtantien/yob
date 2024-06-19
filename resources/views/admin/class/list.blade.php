@@ -9,7 +9,8 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Số lượng</th>
+                        <th scope="col">Thời gian bắt đầu</th>
+                        <th scope="col">Thời gian kết thúc</th>
                         <th scope="col">Sân</th>
                         <th scope="col">Thao tác</th>
                     </tr>
@@ -18,8 +19,9 @@
                     <tr>
                         <th scope="row">{{ $index + 1 }}</th>
                         <td>{{ $class->name }}</td>
-                        <td>{{ $class->amount }}</td>
-                        <td>{{ $class->court }}</td>
+                        <td>{{ $class->start_date }}</td>
+                        <td>{{ $class->end_date }}</td>
+                        <td>{{ $class->court->name }}</td>
                         <td>
                             <a href="{{ route('class.update', $class->id) }}" class="btn btn-primary">
                                 chỉnh sửa

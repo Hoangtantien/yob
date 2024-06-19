@@ -1,40 +1,59 @@
 @extends('layouts.app')
+
 @section('content')
+    <div class="container">
 
-    <form action="{{ route('class.update.store', $class->id) }}" method="post" class = "cs-form">
-        @csrf
-        <h5 class="text-center">
-          Cập nhật lớp học
-        </h5>
-        
-        {{-- <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="{{$user->}}">
-        </div> --}}
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <form action="{{ route('class.create.store') }}" method="post" class="cs-form">
+            @csrf
+            <h5 class="text-center mb-3">
+                Thêm lớp học
+            </h5>
+            <div class="mb-3 row mb-4">
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Tên lớp học</label>
+                    <input type="text" class="form-control" name="name" value="{{ $class->name }}">
+                </div>
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Mô tả lớp học</label>
+                    <input type="text" class="form-control" name="description" value="{{ $class->description }}">
+                </div>
             </div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
+            <div class="mb-3 row mb-4">
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Thời gian bắt đầu</label>
+                    <input type="date" class="form-control" name="start_date" value="{{ $class->start_date }}">
+                </div>
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Thời gian kết thúc</label>
+                    <input type="date" class="form-control" name="end_date" value="{{ $class->end_date }}">
+                </div>
             </div>
-        @endif
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Tên lớp</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" value="{{$class->name}}">
-            
-          </div>
-          <label for="exampleInputEmail1" class="form-label">Số lượng</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="amount" value="{{$class->amount}}">
-          
-        <button type="submit" class="btn btn-primary cs-btn">Hoàn thành</button>
-      </form>
-</div>
+            <div class="mb-3 row mb-4">
+                <div class="col-4">
+                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#coachModal" style="width:100%">
+                        Chọn huấn luyện viên
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#studentModal" style="width:100%">
+                        Chọn học sinh
+                    </div>
+                </div>
+                <div class="col-4">
+                    <select class="form-select" aria-label="Default select example" name="court_id">
+                        <option selected>---Chọn sân--</option>
+                        @foreach ($courts as $court)
+                            <option value="{{ $court->id }}" {{ $class->court_id == $court->id ? "selected" : "" }}>{{ $court->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
 
+            </div>
+            <button type="submit" class="btn btn-primary cs-btn">Tạo lớp</button>
+            @include('admin.class.update-modal-coach')
+            @include('admin.class.update-modal-student')
+        </form>
+    </div>
 @endsection

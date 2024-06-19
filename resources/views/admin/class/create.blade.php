@@ -9,9 +9,13 @@
                 Thêm lớp học
             </h5>
             <div class="mb-3 row mb-4">
-                <div class="col-12">
+                <div class="col-6">
                     <label for="exampleInputEmail1" class="form-label">Tên lớp học</label>
                     <input type="text" class="form-control" name="name">
+                </div>
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Mô tả lớp học</label>
+                    <input type="text" class="form-control" name="description">
                 </div>
             </div>
             <div class="mb-3 row mb-4">
@@ -36,9 +40,11 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <select class="form-select" aria-label="Default select example" name="type">
+                    <select class="form-select" aria-label="Default select example" name="court_id">
                         <option selected>---Chọn sân--</option>
-
+                        @foreach ($courts as $court)
+                            <option value="{{ $court->id }}">{{ $court->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

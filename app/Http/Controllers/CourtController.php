@@ -17,19 +17,29 @@ class CourtController extends Controller
     {
         try {
             // Validate the request
-            $request->validate([
-                'name' => 'required|string',
-            ]);
+            // $request->validate([
+            //     'name' => 'required',
+            //     'open_time' => 'required',
+            //     'close_time' => 'required',
+            //     'type' => 'required',
+            //     'address' => 'required',
+            // ]);
 
             // Create the court
             $court = new Court();
             $court->name = $request->name;
+            $court->description = $request->description;
+            $court->open_time = $request->open_time;
+            $court->close_time = $request->close_time;
+            $court->type = $request->type;
+            $court->address = $request->address;
             $court->save();
 
             // Redirect or respond as necessary
             return redirect()->route('court.list')->with('success', 'Court created successfully.');
         } catch (\Exception $e) {
             // Log the error
+            dd($e->getMessage());
             Log::error('Court creation failed: ' . $e->getMessage());
 
             // Redirect back with an error message
@@ -37,10 +47,20 @@ class CourtController extends Controller
         }
     }
 
-    public function showList()
+    public function showList(Request $request)
     {
-        $courts = Court::all(); // Fetch all courts from the database
-        return view('admin.court.list', compact('courts'));
+        $search = $request->query('search');
+        $courts = Court::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
+
+        $data['courts'] = $courts;
+        $data['search'] = $search;
+        return view('admin.court.list', $data);
     }
 
     public function delete(Request $request, $id)
@@ -49,7 +69,14 @@ class CourtController extends Controller
         $court = Court::find($id);
 
         if ($court) {
-            // Delete the court
+            $classes = $court->projectClasses;
+
+            foreach ($classes as $class) {
+                $class->court_id = null;
+                $class->save();
+            }
+
+            // Xóa sân
             $court->delete();
 
             // Add a success message
@@ -72,6 +99,10 @@ class CourtController extends Controller
             // Validate the request
             $request->validate([
                 'name' => 'required|string',
+                'open_time' => 'required',
+                'close_time' => 'required',
+                'type' => 'required',
+                'address' => 'required',
             ]);
 
             // Find the court by ID
@@ -79,6 +110,11 @@ class CourtController extends Controller
 
             // Update the court's details
             $court->name = $request->name;
+            $court->description = $request->description;
+            $court->open_time = $request->open_time;
+            $court->close_time = $request->close_time;
+            $court->type = $request->type;
+            $court->address = $request->address;
             $court->save();
 
             // Redirect with success message

@@ -17,7 +17,9 @@
                         @foreach ($coachs as $coach)
                             <tr>
                                 <th>
-                                    <input class="form-check-input" type="checkbox" value="{{ $coach->id }}" id="flexCheckDefault" name="coach_ids[]">
+                                    <input class="form-check-input" type="checkbox" value="{{ $coach->id }}" id="flexCheckDefault" name="coach_ids[]"
+                                    @if(in_array($coach->id, old('student_ids', $selected_coaches ?? []))) checked @endif
+                                    >
                                 </th>
                                 <th style="font-weight:400">
                                     {{ $coach->name }}
@@ -29,6 +31,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

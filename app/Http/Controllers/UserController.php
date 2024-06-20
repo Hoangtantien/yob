@@ -31,13 +31,15 @@ class UserController extends Controller
             // Create the user
             $user = new User();
             $user->email = $request->email;
-            $user->password = Hash::make($request->password); // Hash the password            
+            $user->password = Hash::make($request->password);
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->type = $request->type;
             $user->base_salary = $request->base_salary;
-            $user->dob = $request->dob; // Assuming you have a role field in your users table
+            $user->start_working = $request->start_working;
+            $user->end_working = $request->end_working;
+            $user->dob = $request->dob;
             $user->save();
 
             // Redirect or respond as necessary
@@ -67,17 +69,16 @@ class UserController extends Controller
                 'type' => 'required|integer'
             ]);
 
-            // Find the user
             $user = User::findOrFail($id);
-
-            // Update the user's details
             $user->email = $request->email;
             $user->name = $request->name;
             $user->type = $request->type;
             $user->base_salary = $request->base_salary;
-            $user->dob = $request->dob; // Assuming you have a role field in your users table
+            $user->dob = $request->dob; 
             $user->phone = $request->phone;
             $user->address = $request->address;
+            $user->start_working = $request->start_working;
+            $user->end_working = $request->end_working;
             $user->save();
 
             // Redirect with success message
@@ -90,11 +91,21 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'There was an error updating the user. Please try again.');
         }
     }
-    public function showList()
+    public function showList(Request $request)
     {
-        $users = User::paginate(6); // Fetch all users from the database
+        $search = $request->query('search');
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
 
-        return view('admin.user.list', compact('users'));
+        $data['users'] = $users;
+        $data['search'] = $search;
+
+        return view('admin.user.list', $data);
     }
     public function delete(Request $request, $id)
     {

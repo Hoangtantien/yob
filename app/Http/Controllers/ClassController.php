@@ -53,26 +53,53 @@ class ClassController extends Controller
             return redirect()->back()->with('error', 'There was an error creating the user. Please try again.');
         }
     }
-    public function showList()
-    {
-        $classes = ProjectClass::all(); // Fetch all users from the database
+    public function showListManage(Request $request){
+        $search = $request->query('search');
+        $classes = ProjectClass::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
 
-        return view('admin.class.list', compact('classes'));
+        $data['classes'] = $classes;
+        $data['search'] = $search;
+        return view('admin.class.manage-list', $data);  
+    }
+    public function showList(Request $request)
+    {
+        $search = $request->query('search');
+        $classes = ProjectClass::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
+
+        $data['classes'] = $classes;
+        $data['search'] = $search;
+        return view('admin.class.list', $data);
     }
     public function delete(Request $request, $id)
     {
-        // Tìm người dùng theo id
-        $class = ProjectClass::find($id);
+        try {
+            $class = ProjectClass::findOrFail($id);
 
-        if ($class) {
-            // Xóa người dùng
+            $class->coaches()->detach();
+            $class->students()->detach();
+
             $class->delete();
 
-            // Thêm thông báo xóa thành công (tuỳ chọn)
-            return redirect()->route('class.list')->with('success', 'lớp học này đã được xóa thành công.');
-        }
+            return redirect()->route('class.list')->with('success', 'Lớp học này đã được xóa thành công.');
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Class deletion failed: ' . $e->getMessage());
 
-        return redirect()->route('class.list')->with('error', 'Lớp học này không tồn tại.');
+            // Redirect back with error message
+            return redirect()->route('class.list')->with('error', 'Có lỗi xảy ra khi xóa lớp học. Vui lòng thử lại.');
+        }
     }
     public function showUpdate($id)
     {
@@ -81,9 +108,13 @@ class ClassController extends Controller
         $students = Student::all();
         $coachs = User::where('type', 2)->get();
         $courts = Court::all();
+        $selected_students = $class->students->pluck('id')->toArray();
+        $selected_coaches = $class->coaches->pluck('id')->toArray();
         $data['students'] = $students;
         $data['courts'] = $courts;
         $data['coachs'] = $coachs;
+        $data['selected_students'] = $selected_students;
+        $data['selected_coaches'] = $selected_coaches;
         return view('admin.class.update', $data);
     }
     public function updateStore(Request $request, $id)
@@ -92,9 +123,6 @@ class ClassController extends Controller
             // Validate the request with custom messages
             $request->validate([
                 'name' => 'required|string',
-                'amount' => 'required|integer|max:20' // Sử dụng 'max' để giới hạn giá trị tối đa là 20
-            ], [
-                'amount.max' => 'Số lượng không được quá 20' // Thông báo lỗi tùy chỉnh
             ]);
 
             // Find the class by ID
@@ -102,9 +130,17 @@ class ClassController extends Controller
 
             // Update the class's details
             $class->name = $request->name;
-            $class->amount = $request->amount;
-            $class->save();
+            $class->description = $request->description;
+            $class->start_date = $request->start_date;
+            $class->end_date = $request->end_date;
+            $class->court_id = $request->court_id;
 
+            $class->save();
+            // Sync coaches with the class
+            $class->coaches()->sync($request->coach_ids);
+
+            // Sync students with the class
+            $class->students()->sync($request->student_ids);
             // Redirect with success message
             return redirect()->route('class.list')->with('success', 'Cập nhật thành công');
         } catch (\Exception $e) {

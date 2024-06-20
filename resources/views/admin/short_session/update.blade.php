@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('short-session.update.store', $short_session->id) }}" method="post" class="cs-form">
+        <form action="{{ route('short-session.update.store', $short_session->id) }}" method="post" class="cs-form-small" >
             @csrf
             <h5 class="text-center mb-3">
                 Chỉnh sửa ca học

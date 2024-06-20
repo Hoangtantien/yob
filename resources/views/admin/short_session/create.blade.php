@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('short-session.create.store') }}" method="post" class="cs-form">
+        <form action="{{ route('short-session.create.store') }}" method="post" class="cs-form-small" >
             @csrf
             <h5 class="text-center mb-3">
                 Thêm ca học

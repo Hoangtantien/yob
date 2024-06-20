@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <form action="{{ route('class.create.store') }}" method="post" class="cs-form">
+        <form action="{{ route('class.update.store', $class->id) }}" method="post" class="cs-form">
             @csrf
             <h5 class="text-center mb-3">
                 Thêm lớp học
@@ -51,7 +51,10 @@
             <div class="mb-3">
 
             </div>
-            <button type="submit" class="btn btn-primary cs-btn">Tạo lớp</button>
+            <div class="mb-3 btn-box">
+                <a href="{{ route('class.list') }}" class="btn btn-secondary ">Quay lại</a>
+                <button type="submit" class="btn btn-primary ">Lưu</button>
+            </div>
             @include('admin.class.update-modal-coach')
             @include('admin.class.update-modal-student')
         </form>

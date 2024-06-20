@@ -17,7 +17,9 @@
                         @foreach ($students as $student)
                             <tr>
                                 <th>
-                                    <input class="form-check-input" type="checkbox" value="{{ $student->id }}" id="flexCheckDefault" name="student_ids[]">
+                                    <input class="form-check-input" type="checkbox" value="{{ $student->id }}" id="flexCheckDefault" name="student_ids[]"
+                                    @if(in_array($student->id, old('student_ids', $selected_students ?? []))) checked @endif
+                                    >
                                 </th>
                                 <th style="font-weight:400">
                                     {{ $student->name }}

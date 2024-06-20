@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="container cs-container">
+        <div class="container cs-container-large">
             <div class="box-header">
                 <div class="box-header-left">
                     <h5>Danh sách lớp học</h5>
-                    <a href="{{ route('class.create') }}" class="btn btn-outline-primary">Thêm</a>
+                  
                 </div>
                 <form class="box-header-right">
                     <input type="text" class="form-control" placeholder="Nhập tên lớp học" name="search">
@@ -22,34 +22,28 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Tên lớp</th>
+                        <th scope="col">Mô tả</th>
                         <th scope="col">Thời gian bắt đầu</th>
                         <th scope="col">Thời gian kết thúc</th>
-                        <th scope="col">Sân</th>
-                        <th scope="col">Thao tác</th>
+                        <th scope="col">Sân bóng</th>
+                        <th scope="col">Tổng học sinh</th>
+                        <th scope="col">Tổng huấn luyện viên</th>
                     </tr>
                 </thead>
                 @foreach ($classes as $index => $class)
                     <tr>
-                        <th scope="row">{{ $index + 1 }}</th>
                         <td>{{ $class->name }}</td>
+                        <td >
+                            {{ strlen($class->description) > 30 ? substr($class->description, 0, 30) . '...' : $class->description }}
+                        </td>
+
                         <td>{{ $class->start_date }}</td>
                         <td>{{ $class->end_date }}</td>
                         <td>{{ isset($class->court_id) ? $class->court->name : "Chưa có sân" }}</td>
-                        <td>
-                            <a href="{{ route('class.update', $class->id) }}" class="btn btn-primary">
-                                 Sửa
-                            </a>
-                            <form action="{{ route('class.delete', $class->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có chắc chắn muốn xóa lớp này không?');">
-                                    Xóa
-                                </button>
-                            </form>
-                            </d>
+                        <td>1</td>
+                        <td>1</td>
+                       
                     </tr>
                 @endforeach
             </table>

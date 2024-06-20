@@ -30,12 +30,14 @@
             </div>
             <div class="mb-3 row mb-4">
                 <div class="col-4">
-                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#coachModal" style="width:100%">
+                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#coachModal"
+                        style="width:100%">
                         Chọn huấn luyện viên
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#studentModal" style="width:100%">
+                    <div class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#studentModal"
+                        style="width:100%">
                         Chọn học sinh
                     </div>
                 </div>
@@ -51,7 +53,10 @@
             <div class="mb-3">
 
             </div>
-            <button type="submit" class="btn btn-primary cs-btn">Tạo lớp</button>
+            <div class="mb-3 btn-box">
+                <a href="{{ route('class.list') }}" class="btn btn-secondary ">Quay lại</a>
+                <button type="submit" class="btn btn-primary ">Tạo lớp</button>
+            </div>
             @include('admin.class.modal-coach')
             @include('admin.class.modal-student')
         </form>

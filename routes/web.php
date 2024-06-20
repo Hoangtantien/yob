@@ -39,6 +39,9 @@ Route::delete('/class/delete/{id}', [App\Http\Controllers\ClassController::class
 Route::get('/class/update/{id}', [App\Http\Controllers\ClassController::class, 'showUpdate'])->name('class.update');
 Route::post('/class/update/store/{id}', [App\Http\Controllers\ClassController::class, 'updateStore'])->name('class.update.store');
 
+
+Route::get('manage/class/list',[App\Http\Controllers\ClassController::class, 'showListManage'])->name('manage.class.list-all');
+
 //courts
 Route::get('/court/create',[App\Http\Controllers\CourtController::class, 'showCreate'])->name('court.create');
 Route::post('/court/create/store', [App\Http\Controllers\CourtController::class, 'createStore'])->name('court.create.store');

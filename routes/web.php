@@ -69,3 +69,5 @@ Route::get('/students/list',[App\Http\Controllers\StudentController::class, 'sho
 Route::delete('/students/delete/{id}', [App\Http\Controllers\StudentController::class, 'delete'])->name('students.delete');
 Route::get('/students/update/{id}', [App\Http\Controllers\StudentController::class, 'showUpdate'])->name('students.update');
 Route::post('/students/update/store/{id}', [App\Http\Controllers\StudentController::class, 'updateStore'])->name('students.update.store');
+// Upload
+Route::post('upload/services', [App\Http\Controllers\UploadController::class, 'store'])->name('upload.services');

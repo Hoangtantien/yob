@@ -13,14 +13,15 @@
             </div>
             <div class="col-6">
                 <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Bạn không có quyền hạn này" name="" readonly>
+                <input type="text" class="form-control" id="exampleInputPassword1"
+                    placeholder="Bạn không có quyền hạn này" name="" readonly>
 
             </div>
         </div>
 
         <div class="mb-3 row">
             <div class="col-6">
-                <label for="exampleInputEmail1" class="form-label" >Tên người dùng <span class="required">*</span></label>
+                <label for="exampleInputEmail1" class="form-label">Tên người dùng <span class="required">*</span></label>
                 <input type="text" class="form-control" name="name" value="{{ $user->name }}">
             </div>
             <div class="col-6">
@@ -52,34 +53,35 @@
             <div class="col-6">
                 <label for="exampleInputEmail1" class="form-label">Lương cơ bản <small>(theo ca)</small></label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    name="base_salary"  value="{{ $user->base_salary }}">
+                    name="base_salary" value="{{ $user->base_salary }}">
             </div>
             <div class="col-6">
                 <label for="" class="mb-2">Chức vụ <span class="required">*</span></label>
                 <select class="form-select" aria-label="Default select example" name="type">
                     <option selected>---Chọn chức vụ---</option>
-                    <option value="0" {{ $user->type === 0 ? "selected" : "" }}>Quản trị viên</option>
-                    <option value="1"{{ $user->type === 1 ? "selected" : "" }}>Giám đốc</option>
-                    <option value="2"{{ $user->type === 2 ? "selected" : "" }}>Huấn luyện viên</option>
+                    <option value="0" {{ $user->type === 0 ? 'selected' : '' }}>Quản trị viên</option>
+                    <option value="1"{{ $user->type === 1 ? 'selected' : '' }}>Giám đốc</option>
+                    <option value="2"{{ $user->type === 2 ? 'selected' : '' }}>Huấn luyện viên</option>
                 </select>
             </div>
         </div>
-        {{-- <div class="mb-3 row">
-          <div class="col-6">
-              <label for="exampleInputEmail1" class="form-label">Ảnh đại diện</small></label>
-              <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                  name="base_salary">
-          </div>
-          <div class="col-6">
-              <div id="preview_image">
+        <div class="mb-3 row">
+            <div class="col-6">
+                <label for="exampleInputEmail1" class="form-label">Ảnh đại diện</small></label>
+                <input type="file" class="form-control" id="upload" aria-describedby="emailHelp" name="file" data-url="{{ route('upload.services') }}">
+                <div id="preview">
+                    <a href="">
+                        <img src="{{ showImage($user->avatar) }}" alt="">
+                    </a>
+                </div>
+                <input type="hidden" id="file" name="avatar" value="{{ $user->avatar }}">
+            </div>
 
-              </div>
-          </div>
-      </div> --}}
+        </div>
 
         <div class="mb-3 btn-box">
-          <a href="{{ route('user.list') }}" class="btn btn-secondary ">Quay lại</a>
-          <button type="submit" class="btn btn-primary ">Lưu</button>
+            <a href="{{ route('user.list') }}" class="btn btn-secondary ">Quay lại</a>
+            <button type="submit" class="btn btn-primary ">Lưu</button>
         </div>
     </form>
     </div>

@@ -66,18 +66,18 @@
                     </select>
                 </div>
             </div>
-            {{-- <div class="mb-3 row">
+            <div class="mb-3 row">
                 <div class="col-6">
                     <label for="exampleInputEmail1" class="form-label">Ảnh đại diện</small></label>
-                    <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        name="base_salary">
-                </div>
-                <div class="col-6">
-                    <div id="preview_image">
+                    <input class="form-control" type="file" id="upload" name="file"
+                        data-url="{{ route('upload.services') }}">
+
+                    <div id="preview">
 
                     </div>
+                    <input type="hidden" id="file" name="avatar">
                 </div>
-            </div> --}}
+            </div>
 
             <div class="mb-3 btn-box">
                 <a href="{{ route('user.list') }}" class="btn btn-secondary ">Quay lại</a>

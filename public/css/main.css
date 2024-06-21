@@ -196,3 +196,9 @@
     border-top-right-radius:0px ;
     border-bottom-right-radius:0px ;
 }
+#preview img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 20px;
+}

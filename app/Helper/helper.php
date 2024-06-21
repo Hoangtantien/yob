@@ -12,7 +12,8 @@ if (!function_exists('showImage')) {
            
             return asset($path);
         }
-        return asset("/images/default-img.jpg");
+        // return asset("/images/default-img.jpg");
+        return asset("");
 
     }
 }

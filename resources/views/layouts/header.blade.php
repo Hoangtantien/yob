@@ -2,7 +2,13 @@
 <div class="header">
     <div class="header_wrap">
         <div class="user-name">
+            @if (auth()->user()->avatar !== null)
+            <img src="{{ showImage(auth()->user()->avatar) }}" alt="">
+
+            @else
+                
             <img src="{{asset('images/avatar.webp')}}" alt="">
+            @endif
         </div>
         <div class="user-control-menu">
             <a href=""> profile</a>

@@ -40,6 +40,7 @@ class UserController extends Controller
             $user->start_working = $request->start_working;
             $user->end_working = $request->end_working;
             $user->dob = $request->dob;
+            $user->avatar = $request->avatar;
             $user->save();
 
             // Redirect or respond as necessary
@@ -78,6 +79,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->start_working = $request->start_working;
+            $user->avatar = $request->avatar;
             $user->end_working = $request->end_working;
             $user->save();
 

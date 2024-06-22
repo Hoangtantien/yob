@@ -30,7 +30,9 @@ Route::get('/user/update/{id}', [App\Http\Controllers\UserController::class, 'sh
 Route::post('/user/update/store/{id}', [App\Http\Controllers\UserController::class, 'updateStore'])->name('user.update.store');
 Route::get('/user/list/', [App\Http\Controllers\UserController::class, 'showList'])->name('user.list');
 Route::delete('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
-
+Route::get('/show-profile/{id}', [App\Http\Controllers\UserController::class, 'showProfile'])->name('user.show-profile');
+Route::get('/change-password', [App\Http\Controllers\UserController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/change-password', [App\Http\Controllers\UserController::class, 'changePassword'])->name('password.change.store');
 // classes
 Route::get('/class/create',[App\Http\Controllers\ClassController::class, 'showCreate'])->name('class.create');
 Route::post('/class/create/store', [App\Http\Controllers\ClassController::class, 'createStore'])->name('class.create.store');
@@ -38,6 +40,7 @@ Route::get('/class/list',[App\Http\Controllers\ClassController::class, 'showList
 Route::delete('/class/delete/{id}', [App\Http\Controllers\ClassController::class, 'delete'])->name('class.delete');
 Route::get('/class/update/{id}', [App\Http\Controllers\ClassController::class, 'showUpdate'])->name('class.update');
 Route::post('/class/update/store/{id}', [App\Http\Controllers\ClassController::class, 'updateStore'])->name('class.update.store');
+Route::get('/class/detail/{id}', [App\Http\Controllers\ClassController::class, 'showDetailAttr'])->name('class.detail');
 
 
 Route::get('manage/class/list',[App\Http\Controllers\ClassController::class, 'showListManage'])->name('manage.class.list-all');

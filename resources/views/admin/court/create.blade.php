@@ -36,6 +36,23 @@
                     <input type="text" class="form-control" name="address">
                 </div>
                 <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Số điện thoại <span class="required">*</span></label>
+                    <input type="text" class="form-control" name="phone">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Ảnh sân</small></label>
+                    <input class="form-control" type="file" id="upload" name="file"
+                        data-url="{{ route('upload.services') }}">
+
+                    <div id="preview">
+
+                    </div>
+                    <input type="hidden" id="file" name="img">
+                </div>
+                <div class="col-6">
                     <label for="exampleInputEmail1" class="form-label">Loại sân <span class="required">*</span></label>
                     <select class="form-select" aria-label="Default select example" name="type">
                         <option selected> ---Chọn loại sân---</option>

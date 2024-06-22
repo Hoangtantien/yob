@@ -1,7 +1,8 @@
-$(document).ready(function(){
-    $('.has-child > .menu-link').click(function(e){
-        e.preventDefault(); 
-        $(this).next('.sub-menu').slideToggle(); 
+
+$(document).ready(function () {
+    $(".has-child > .menu-link").click(function (e) {
+        e.preventDefault();
+        $(this).next(".sub-menu").slideToggle();
     });
 
     $("#upload").on("change", function () {
@@ -30,6 +31,27 @@ $(document).ready(function(){
                     alert("Tải file thất bại");
                 }
             },
+        });
+    });
+
+    $(".show-modal-event").on("click", function () {
+        var url = $(this).data("url");
+        var type = $(this).data("type");
+
+        $.ajax({
+            type: "get",
+            url: url,
+            data: {
+                type: type
+            },
+            dataType: "html",
+            success: function (response) {
+                console.log(response);
+                $("#modal-show").html(response);
+            },
+            error:function(jqXHR, exception){
+                console.log(jqXHR, exception);
+            }
         });
     });
 });

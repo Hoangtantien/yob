@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\ProjectClass;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -46,5 +47,24 @@ class User extends Authenticatable
     public function classes()
     {
         return $this->belongsToMany(ProjectClass::class, 'coach_class', 'user_id', 'class_id');
+    }
+
+    public function getType()
+    {
+        switch ($this->type) {
+
+            case 0:
+                return 'Quản trị viên';
+                break;
+            case 1:
+                return 'Giám đốc';
+                break;
+            case 2:
+                return 'Huấn luyện viên';
+                break;
+            default:
+                return 'Không xác định';
+                break;
+        }
     }
 }

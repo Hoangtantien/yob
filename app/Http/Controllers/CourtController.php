@@ -33,6 +33,8 @@ class CourtController extends Controller
             $court->close_time = $request->close_time;
             $court->type = $request->type;
             $court->address = $request->address;
+            $court->phone = $request->phone;
+            $court->img = $request->img;
             $court->save();
 
             // Redirect or respond as necessary
@@ -115,6 +117,8 @@ class CourtController extends Controller
             $court->close_time = $request->close_time;
             $court->type = $request->type;
             $court->address = $request->address;
+            $court->phone = $request->phone;
+            $court->img = $request->img;
             $court->save();
 
             // Redirect with success message

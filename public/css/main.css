@@ -79,7 +79,9 @@
     transition: all 0.5s;
     background: #f5922f;
     right: 0;
+    min-width: 170px;
     top: 63px;
+    text-align: end;
 }
 .user-control-menu a {
     text-decoration: none;
@@ -201,4 +203,43 @@
     height: 150px;
     object-fit: cover;
     margin-top: 20px;
+}
+.show-modal-event{
+    cursor: pointer;
+}
+.show-modal-event:hover{
+    font-weight: 700;
+}
+.cs-modal-wrap{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #00000070;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cs-modal {
+    width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+.cs-modal-header{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.img-response{
+    width: 150px;
+    height: 150px;
+}
+.cs-modal-span{
+    font-weight: 600;
+}
+.img-avatar{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
 }

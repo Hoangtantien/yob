@@ -27,8 +27,8 @@
                         <th scope="col">Thời gian bắt đầu</th>
                         <th scope="col">Thời gian kết thúc</th>
                         <th scope="col">Sân bóng</th>
-                        <th scope="col">Tổng học sinh</th>
-                        <th scope="col">Tổng huấn luyện viên</th>
+                        <th scope="col"> Học sinh</th>
+                        <th scope="col"> Huấn luyện viên</th>
                     </tr>
                 </thead>
                 @foreach ($classes as $index => $class)
@@ -40,9 +40,21 @@
 
                         <td>{{ $class->start_date }}</td>
                         <td>{{ $class->end_date }}</td>
-                        <td>{{ isset($class->court_id) ? $class->court->name : "Chưa có sân" }}</td>
-                        <td>1</td>
-                        <td>1</td>
+                        <td>
+                            <div class="show-modal-event" data-url="{{ route('class.detail',$class->id) }}" data-type="court">
+                                {{ isset($class->court_id) ? $class->court->name : "Chưa có sân" }}
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="show-modal-event" data-url="{{ route('class.detail',$class->id) }}" data-type="student">
+                                {{ count($class->students) }}
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="show-modal-event" data-url="{{ route('class.detail',$class->id) }}" data-type="coaches">
+                                {{ count($class->coaches) }}
+                            </div>
+                        </td>
                        
                     </tr>
                 @endforeach

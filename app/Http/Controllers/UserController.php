@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +49,6 @@ class UserController extends Controller
         } catch (\Exception $e) {
             // Log the error
             Log::error('User creation failed: ' . $e->getMessage());
-            dd($e->getMessage());
             // Redirect back with an error message
             return redirect()->back()->with('error', 'There was an error creating the user. Please try again.');
         }
@@ -58,6 +58,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $data['user'] = $user;
         return view('admin.user.update', $data);
+    }
+    public function showProfile($id)
+    {
+        $user = User::findOrFail($id);
+        $data['user'] = $user;
+        return view('page.profile', $data);
     }
     public function updateStore(Request $request, $id)
     {
@@ -82,11 +88,15 @@ class UserController extends Controller
             $user->avatar = $request->avatar;
             $user->end_working = $request->end_working;
             $user->save();
+            if($request->profile == 1){
+            return redirect()->back()->with('success', 'User updated successfully.');
 
+            }
             // Redirect with success message
             return redirect()->route('user.list')->with('success', 'User updated successfully.');
         } catch (\Exception $e) {
             // Log the error
+
             Log::error('User update failed: ' . $e->getMessage());
 
             // Redirect back with error message
@@ -122,5 +132,30 @@ class UserController extends Controller
             return redirect()->route('user.list')->with('success', 'Người dùng đã được xóa thành công.');
         }
         return redirect()->route('user.list')->with('error', 'Người dùng không tồn tại.');
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('auth.passwords.change-password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Check if the current password matches
+        if (!Hash::check($request->current_password, Auth::user()->password)) {
+            return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không chính xác']);
+        }
+
+        // Update the password
+        Auth::user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return back()->with('success', 'Đổi mật khẩu thành công');
     }
 }

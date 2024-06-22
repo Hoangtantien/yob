@@ -31,6 +31,9 @@
 
         </main>
     </div>
+    <div id="modal-show">
+        
+    </div>
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

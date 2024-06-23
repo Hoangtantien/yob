@@ -74,3 +74,14 @@ Route::get('/students/update/{id}', [App\Http\Controllers\StudentController::cla
 Route::post('/students/update/store/{id}', [App\Http\Controllers\StudentController::class, 'updateStore'])->name('students.update.store');
 // Upload
 Route::post('upload/services', [App\Http\Controllers\UploadController::class, 'store'])->name('upload.services');
+
+
+// Achivements
+Route::get('/achievement/create',[App\Http\Controllers\AchievementController::class, 'showCreate'])->name('achievement.create');
+Route::post('/achievement/create/store', [App\Http\Controllers\AchievementController::class, 'createStore'])->name('achievement.create.store');
+Route::get('/achievement/list',[App\Http\Controllers\AchievementController::class, 'showList'])->name('achievement.list');
+Route::delete('/achievement/delete/{id}', [App\Http\Controllers\AchievementController::class, 'delete'])->name('achievement.delete');
+Route::get('/achievement/update/{id}', [App\Http\Controllers\AchievementController::class, 'showUpdate'])->name('achievement.update');
+Route::post('/achievement/update/store/{id}', [App\Http\Controllers\AchievementController::class, 'updateStore'])->name('achievement.update.store');
+Route::get('/achievement/show-detail/{id}', [App\Http\Controllers\AchievementController::class, 'showDetail'])->name('achievement.show-detail');
+Route::get('/achievement/user_achievement/{id}', [App\Http\Controllers\AchievementController::class, 'getUserAchievement'])->name('achievement.user-achievement');

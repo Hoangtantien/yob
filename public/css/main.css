@@ -243,3 +243,7 @@
     height: 55px;
     border-radius: 50%;
 }
+.showUserAchievement:hover{
+    font-weight: 700;
+    cursor: pointer;
+}

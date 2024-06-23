@@ -81,16 +81,15 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->type = $request->type;
             $user->base_salary = $request->base_salary;
-            $user->dob = $request->dob; 
+            $user->dob = $request->dob;
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->start_working = $request->start_working;
             $user->avatar = $request->avatar;
             $user->end_working = $request->end_working;
             $user->save();
-            if($request->profile == 1){
-            return redirect()->back()->with('success', 'User updated successfully.');
-
+            if ($request->profile == 1) {
+                return redirect()->back()->with('success', 'User updated successfully.');
             }
             // Redirect with success message
             return redirect()->route('user.list')->with('success', 'User updated successfully.');
@@ -125,10 +124,9 @@ class UserController extends Controller
         $user = User::find($id);
 
         if ($user) {
-            // Xóa người dùng
+            $user->classes()->detach();
+            $user->achievements()->detach();
             $user->delete();
-
-            // Thêm thông báo xóa thành công (tuỳ chọn)
             return redirect()->route('user.list')->with('success', 'Người dùng đã được xóa thành công.');
         }
         return redirect()->route('user.list')->with('error', 'Người dùng không tồn tại.');

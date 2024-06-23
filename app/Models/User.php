@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function classes()
     {
-        return $this->belongsToMany(ProjectClass::class, 'coach_class', 'user_id', 'class_id');
+        return $this->belongsToMany(ProjectClass::class, 'coach_class', 'coach_id', 'class_id');
     }
 
     public function getType()
@@ -66,5 +66,12 @@ class User extends Authenticatable
                 return 'Không xác định';
                 break;
         }
+    }
+
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class, 'achievement_user')
+            ->withPivot('date_achieved')
+            ->withTimestamps();
     }
 }

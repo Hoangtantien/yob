@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,24 +16,29 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
-        <div class="sidebar">
-            @include('layouts.sidebar')
-        </div>
+        @if (auth()->user())
+            <div class="sidebar">
+                @include('layouts.sidebar')
+            </div>
+        @endif
+
         <main class = "main">
             @include('layouts.header')
-            
+
             @yield('content')
 
         </main>
     </div>
     <div id="modal-show">
-        
+
     </div>
     @if (session('success'))
         <div class="alert alert-success">
@@ -46,8 +52,9 @@
         </div>
     @endif
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{ asset('js/main.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
 </body>
+
 </html>

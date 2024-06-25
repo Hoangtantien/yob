@@ -85,3 +85,11 @@ Route::get('/achievement/update/{id}', [App\Http\Controllers\AchievementControll
 Route::post('/achievement/update/store/{id}', [App\Http\Controllers\AchievementController::class, 'updateStore'])->name('achievement.update.store');
 Route::get('/achievement/show-detail/{id}', [App\Http\Controllers\AchievementController::class, 'showDetail'])->name('achievement.show-detail');
 Route::get('/achievement/user_achievement/{id}', [App\Http\Controllers\AchievementController::class, 'getUserAchievement'])->name('achievement.user-achievement');
+
+
+
+
+
+// Achivements
+Route::get('/timelog/get-checkin/', [App\Http\Controllers\TimeLogController::class, 'getCheckIn'])->name('timelog.get-checkin');
+Route::post('/timelog/store-check-in/', [App\Http\Controllers\TimeLogController::class, 'storeCheckin'])->name('timelog.store-check-in');

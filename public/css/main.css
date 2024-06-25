@@ -31,9 +31,8 @@
     gap: 10px;
     width: fit-content;
 }
-.sub-menu-item a:hover{
+.sub-menu-item a:hover {
     color: #d4d4d4;
-    
 }
 .menu-link svg {
     width: 13px;
@@ -142,13 +141,13 @@
     border-radius: 50%;
     height: 45px;
 }
-.btn-box{
+.btn-box {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
     align-items: center;
 }
-.required{
+.required {
     color: red;
 }
 .alert {
@@ -169,48 +168,48 @@
         opacity: 0;
     }
 }
-.box-header{
+.box-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
 }
-.box-header-left{
+.box-header-left {
     display: flex;
     align-items: baseline;
     gap: 18px;
 }
-.box-header-right{
+.box-header-right {
     display: flex;
 }
-.box-header-left a{
+.box-header-left a {
     padding: 3px 12px;
 }
-.box-header-right button svg{
+.box-header-right button svg {
     width: 16px;
     fill: #fff;
 }
 .box-header-right button {
-    border-top-left-radius:0px ;
-    border-bottom-left-radius:0px ;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 .box-header-right input {
-    border-top-right-radius:0px ;
-    border-bottom-right-radius:0px ;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
-#preview img{
+#preview img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     margin-top: 20px;
 }
-.show-modal-event{
+.show-modal-event {
     cursor: pointer;
 }
-.show-modal-event:hover{
+.show-modal-event:hover {
     font-weight: 700;
 }
-.cs-modal-wrap{
+.cs-modal-wrap {
     position: fixed;
     top: 0;
     left: 0;
@@ -227,23 +226,109 @@
     border-radius: 10px;
     padding: 20px;
 }
-.cs-modal-header{
+.cs-modal-header {
     font-size: 18px;
     margin-bottom: 20px;
 }
-.img-response{
+.img-response {
     width: 150px;
     height: 150px;
 }
-.cs-modal-span{
+.cs-modal-span {
     font-weight: 600;
 }
-.img-avatar{
+.img-avatar {
     width: 55px;
     height: 55px;
     border-radius: 50%;
 }
-.showUserAchievement:hover{
+.showUserAchievement:hover {
     font-weight: 700;
     cursor: pointer;
+}
+#timelog-section {
+    width: 80%;
+    max-width: 1100px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 30px;
+    margin: 40px auto;
+    border-radius: 10px;
+}
+.timelog-header, .timelog-body-header {
+    font-size: 18px;
+}
+.filer-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.date-filter{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+.date-filter input {
+    max-width: 300px;
+}
+
+#checkinModal .input-group-text{
+    border-top-right-radius: 0px ;
+    border-bottom-right-radius: 0px ;
+}
+.list-date-table table thead th{
+    font-weight: 400;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    border: none;
+    color: #ffffff;
+    background-color: #f5922f;
+    border-right: 1px solid #d3d3d3;
+
+}
+.timelog-list{
+    margin-top: 20px;
+}
+.list-date-table table tbody tr td{
+    padding: 30px 25px;
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: middle;
+    color: #5b6e88;
+    text-align: center;
+    border-right: 1px solid #d3d3d3;
+
+}
+.list-date-table table thead th span{
+    white-space: nowrap;
+}
+.list_short-session-table{
+    flex: 0 0  170px;
+    border-right: 1px solid #d3d3d3;
+}
+.list_short-session-table .list_short-session-header{
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    color: #ffffff;
+    text-align: center;
+    background-color: #f5922f;
+}
+.list_short-session-table .list_short-session-item{
+    padding: 18.8px 25px;
+    font-size: 14px;
+    vertical-align: middle;
+    color: #000000;
+    border-bottom: 1px solid #dee2e6;
+    text-align: center;
+}
+.active-timelog{
+    background-color: #ffca00 !important;
 }

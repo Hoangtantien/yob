@@ -18,9 +18,12 @@
             </div>
         </div>
         <div class="timelog-body">
-            <div class="timelog-body-header">
-                Danh sách chấm công
+            <div class="timelog-body-header" style="text-transform: uppercase">
+                Danh sách chấm công  {{ $currentMonth }}
             </div>
+            <small>
+                Số công hiện tại : {{ $totalTimelogs }}
+            </small>
             <div class="timelog-list d-flex align-items-start">
                 <div class="list_short-session-table">
                     <div class="list_short-session-header">

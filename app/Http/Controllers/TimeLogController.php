@@ -44,13 +44,14 @@ class TimeLogController extends Controller
             ->whereMonth('date', $currentDate->month)
             ->whereYear('date', $currentDate->year)
             ->get();
-
+        $totalTimelogs = $timelogs->count();
         $data['short_session'] = $short_session;
         $data['classes'] = $classes;
         $data['days'] = $allDaysInMonth;
         $data['currentMonth'] = $this->translateMonth($currentDate->month);
         $data['currentYear'] = $currentDate->year;
         $data['timelogs'] = $timelogs;
+        $data['totalTimelogs'] = $totalTimelogs;
         return view('page.timelogs.check-in', $data);
     }
     public static function translateMonth($englishMonth)
@@ -103,14 +104,14 @@ class TimeLogController extends Controller
             $shortSession = ShortSession::findOrFail($request->short_session_id);
 
             $currentDateTime = now()->setTimezone('Asia/Ho_Chi_Minh');
-            
+
             $startTime = \Carbon\Carbon::parse($shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
             $endTime = \Carbon\Carbon::parse($shortSession->end_time, 'Asia/Ho_Chi_Minh');
-            
+
             // fake data
             // $currentDateTime = \Carbon\Carbon::create(2024, 5, 1, 19, 0, 0, 'Asia/Ho_Chi_Minh');
-            $startTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
-            $endTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->end_time, 'Asia/Ho_Chi_Minh');
+            // $startTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
+            // $endTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->end_time, 'Asia/Ho_Chi_Minh');
             // fake data
 
 

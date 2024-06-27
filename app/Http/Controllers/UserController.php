@@ -87,6 +87,7 @@ class UserController extends Controller
             return redirect()->route('user.list')->with('success', 'User updated successfully.');
         } catch (\Exception $e) {
             // Log the error
+            
             Log::error('User update failed: ' . $e->getMessage());
 
             // Redirect back with error message

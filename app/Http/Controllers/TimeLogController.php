@@ -7,6 +7,7 @@ use App\Models\ShortSession;
 use App\Models\ProjectClass;
 use Illuminate\Support\Carbon;
 use App\Models\TimeLog;
+use App\Models\User;
 
 class TimeLogController extends Controller
 {
@@ -23,7 +24,8 @@ class TimeLogController extends Controller
         }
         $classes = $query->orderBy('created_at', 'desc')->get();
 
-        $currentDate = now()->timezone('Asia/Ho_Chi_Minh');
+        $selectedMonth = $request->input('selected_month', now()->month);
+        $currentDate = now()->timezone('Asia/Ho_Chi_Minh')->startOfMonth()->month($selectedMonth);
         // $currentDate = now()->startOfMonth()->month(5)->year(2024)->timezone('Asia/Ho_Chi_Minh');
 
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentDate->month, $currentDate->year);
@@ -45,6 +47,7 @@ class TimeLogController extends Controller
             ->whereYear('date', $currentDate->year)
             ->get();
         $totalTimelogs = $timelogs->count();
+
         $data['short_session'] = $short_session;
         $data['classes'] = $classes;
         $data['days'] = $allDaysInMonth;
@@ -52,8 +55,59 @@ class TimeLogController extends Controller
         $data['currentYear'] = $currentDate->year;
         $data['timelogs'] = $timelogs;
         $data['totalTimelogs'] = $totalTimelogs;
+
         return view('page.timelogs.check-in', $data);
     }
+
+
+    public function detail(Request $request, $id, $month)
+    {
+        $short_session = ShortSession::all();
+        $query = ProjectClass::query();
+        $user = User::findOrFail($id);
+    
+        if ($user->type == 2) {
+            $query->whereHas('coaches', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            });
+        }
+        $classes = $query->orderBy('created_at', 'desc')->get();
+    
+        $selectedMonth = $month;
+        $currentDate = now()->timezone('Asia/Ho_Chi_Minh')->startOfMonth()->month($selectedMonth);
+    
+        $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentDate->month, $currentDate->year);
+        $allDaysInMonth = [];
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $date = Carbon::createFromDate($currentDate->year, $currentDate->month, $day);
+            $date->locale('vi');
+            $allDaysInMonth[] = [
+                'day' => $day,
+                'month' => $currentDate->month,
+                'weekday' => $this->translateDay($date->format('D')),
+                'weekday_vi' => $date->format('l'),
+                'date' => $date->toDateString(),
+            ];
+        }
+    
+        $timelogs = Timelog::where('user_id', $user->id)
+            ->whereMonth('date', $currentDate->month)
+            ->whereYear('date', $currentDate->year)
+            ->get();
+        $totalTimelogs = $timelogs->count();
+    
+        $data['short_session'] = $short_session;
+        $data['classes'] = $classes;
+        $data['days'] = $allDaysInMonth;
+        $data['currentMonth'] = $this->translateMonth($currentDate->month);
+        $data['currentYear'] = $currentDate->year;
+        $data['timelogs'] = $timelogs;
+        $data['totalTimelogs'] = $totalTimelogs;
+        $data['user'] = $user;
+    
+        return view('page.timelogs.detail', $data);
+    }
+
     public static function translateMonth($englishMonth)
     {
         $translations = [
@@ -88,6 +142,28 @@ class TimeLogController extends Controller
         return $translations[$englishDay] ?? $englishDay;
     }
 
+    public function list(Request $request)
+    {
+        $selectedMonth = $request->input('selected_month', now()->month);
+        $selectedYear = now()->year;
+
+        $users = User::where('type', 2)
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        foreach ($users as $user) {
+            $user->totalSessions = Timelog::where('user_id', $user->id)
+                ->whereMonth('date', $selectedMonth)
+                ->whereYear('date', $selectedYear)
+                ->count();
+        }
+
+        $data['users'] = $users;
+        $data['selectedMonth'] = $selectedMonth;
+
+        return view('page.timelogs.list', $data);
+    }
+
     public function storeCheckin(Request $request)
     {
         try {
@@ -103,15 +179,14 @@ class TimeLogController extends Controller
 
             $shortSession = ShortSession::findOrFail($request->short_session_id);
 
-            $currentDateTime = now()->setTimezone('Asia/Ho_Chi_Minh');
-
-            $startTime = \Carbon\Carbon::parse($shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
-            $endTime = \Carbon\Carbon::parse($shortSession->end_time, 'Asia/Ho_Chi_Minh');
+            // $currentDateTime = now()->setTimezone('Asia/Ho_Chi_Minh');
+            // $startTime = \Carbon\Carbon::parse($shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
+            // $endTime = \Carbon\Carbon::parse($shortSession->end_time, 'Asia/Ho_Chi_Minh');
 
             // fake data
-            // $currentDateTime = \Carbon\Carbon::create(2024, 5, 1, 19, 0, 0, 'Asia/Ho_Chi_Minh');
-            // $startTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
-            // $endTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->end_time, 'Asia/Ho_Chi_Minh');
+            $currentDateTime = \Carbon\Carbon::create(2024, 5, 31, 8, 0, 0, 'Asia/Ho_Chi_Minh');
+            $startTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
+            $endTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->end_time, 'Asia/Ho_Chi_Minh');
             // fake data
 
 

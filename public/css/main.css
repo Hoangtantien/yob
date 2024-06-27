@@ -274,7 +274,7 @@
     gap: 20px;
     flex: 1;
 }
-.date-filter input {
+.date-filter select {
     max-width: 300px;
 }
 

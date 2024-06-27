@@ -93,3 +93,5 @@ Route::get('/achievement/user_achievement/{id}', [App\Http\Controllers\Achieveme
 // Achivements
 Route::get('/timelog/get-checkin/', [App\Http\Controllers\TimeLogController::class, 'getCheckIn'])->name('timelog.get-checkin');
 Route::post('/timelog/store-check-in/', [App\Http\Controllers\TimeLogController::class, 'storeCheckin'])->name('timelog.store-check-in');
+Route::get('/timelog/list/', [App\Http\Controllers\TimeLogController::class, 'list'])->name('timelog.list');
+Route::get('/timelog/detail/{id}/{month}', [App\Http\Controllers\TimeLogController::class, 'detail'])->name('timelog.detail');

@@ -5,45 +5,15 @@
 
 
     <div id="timelog-section">
-        <div class="timelog-header">
-            Bảng chấm công
-        </div>
-        <div class="filer-wrap">
-            <form action="" class="date-filter" method="get" id="month-form">
-                Chọn tháng
-                <select name="selected_month" id="selected_month" class="form-control" onchange="document.getElementById('month-form').submit();">
-                    <?php
-                    $vietnameseMonths = [
-                        1 => 'Tháng 1',
-                        2 => 'Tháng 2',
-                        3 => 'Tháng 3',
-                        4 => 'Tháng 4',
-                        5 => 'Tháng 5',
-                        6 => 'Tháng 6',
-                        7 => 'Tháng 7',
-                        8 => 'Tháng 8',
-                        9 => 'Tháng 9',
-                        10 => 'Tháng 10',
-                        11 => 'Tháng 11',
-                        12 => 'Tháng 12',
-                    ];
-                    foreach ($vietnameseMonths as $monthNumber => $monthName) {
-                        $selected = request()->get('selected_month', now()->month) == $monthNumber ? 'selected' : '';
-                        echo "<option value=\"$monthNumber\" $selected>$monthName</option>";
-                    }
-                    ?>
-                </select>
-            </form>
-            <div class="checkin-modal btn btn-outline-primary" data-toggle="modal" data-target="#checkinModal">
-                Đăng ký ca dạy
-            </div>
+        <div class="timelog-header mb-3">
+            Bảng chấm công của {{ $user->name }}
         </div>
         <div class="timelog-body">
             <div class="timelog-body-header" style="text-transform: uppercase">
                 Danh sách chấm công {{ $currentMonth }}
             </div>
             <small>
-                Số công hiện tại : {{ $totalTimelogs }}
+                Số công của tháng : {{ $totalTimelogs }}
             </small>
             <div class="timelog-list d-flex align-items-start">
                 <div class="list_short-session-table">
@@ -110,5 +80,4 @@
             </div>
         </div>
     </div>
-    @include('page.timelogs.modal-check-in')
 @endsection

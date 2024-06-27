@@ -62,7 +62,14 @@ class CourtController extends Controller
 
         $data['courts'] = $courts;
         $data['search'] = $search;
-        return view('admin.court.list', $data);
+        if (auth()->user()->type !== 2){
+            return view('admin.court.list', $data);
+
+        }else{
+            return view('admin.court.list-hlv', $data);
+
+        }
+                        
     }
 
     public function delete(Request $request, $id)

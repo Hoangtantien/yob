@@ -32,10 +32,18 @@ class ShortSessionController extends Controller
             return back();
         }
     }
-    public function showList()
+    public function showList(Request $request)
     {
-        $short_sessions = ShortSession::all();
+        $search = $request->query('search');
+        $short_sessions = ShortSession::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['search' => $search]);
         $data['short_sessions'] = $short_sessions;
+        $data['search'] = $search;
         return view('admin.short_session.list', $data);
     }
     public function showUpdate($id)

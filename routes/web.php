@@ -95,3 +95,9 @@ Route::get('/timelog/get-checkin/', [App\Http\Controllers\TimeLogController::cla
 Route::post('/timelog/store-check-in/', [App\Http\Controllers\TimeLogController::class, 'storeCheckin'])->name('timelog.store-check-in');
 Route::get('/timelog/list/', [App\Http\Controllers\TimeLogController::class, 'list'])->name('timelog.list');
 Route::get('/timelog/detail/{id}/{month}', [App\Http\Controllers\TimeLogController::class, 'detail'])->name('timelog.detail');
+
+
+
+// Salary
+Route::get('/salary/create/', [App\Http\Controllers\SalaryController::class, 'create'])->name('salary.create');
+Route::post('/salary/create/', [App\Http\Controllers\SalaryController::class, 'store'])->name('salary.store');

@@ -1,5 +1,3 @@
-
-
 <div class="side_bar-header">
     <a href="/">
         <img src="{{ asset('images/logo1.jpg') }}" alt="" class ="logo">
@@ -44,9 +42,9 @@
                 Thành tích đạt được
             </span>
         </a>
-       
+
     </li>
-   
+
     <li class="menu-item ">
         <a href="{{ route('timelog.get-checkin') }}" class="menu-link">
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +56,6 @@
                 Chấm công
             </span>
         </a>
-      
     </li>
    
 </ul>

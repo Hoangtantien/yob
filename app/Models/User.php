@@ -74,4 +74,8 @@ class User extends Authenticatable
             ->withPivot('date_achieved')
             ->withTimestamps();
     }
+    public function timelogs()
+    {
+        return $this->hasMany(Timelog::class);
+    }
 }

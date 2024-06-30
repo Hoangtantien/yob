@@ -11,6 +11,7 @@ class Salary extends Model
 
     protected $fillable = [
         'user_id',
+        'title',
         'month',
         'year',
         'total_session',
@@ -18,4 +19,42 @@ class Salary extends Model
         'calculated_salary',
         'created_by',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public static function hasSalaryRecords($userId, $month = null, $year = null)
+    {
+        $query = self::where('user_id', $userId);
+
+        if ($month !== null) {
+            $query->where('month', $month);
+        }
+
+        if ($year !== null) {
+            $query->where('year', $year);
+        }
+
+        return $query->exists();
+    }
+    public static function getSalaryByUserId($userId, $month = null, $year = null, $perPage = null)
+    {
+
+
+        $query = self::where('user_id', $userId);
+        $query->orderBy("id", "DESC");
+        if ($month !== null) {
+            $query->where('month', $month);
+        }
+
+        if ($year !== null) {
+            $query->where('year', $year);
+        }
+        if ($perPage) {
+
+            return $query->paginate($perPage);
+        } else {
+            return $query->get();
+        }
+    }
 }

@@ -78,4 +78,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Timelog::class);
     }
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class, 'user_id');
+    }
+
+   
 }

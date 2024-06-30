@@ -35,7 +35,7 @@
                 </select>
             </form>
             <div class="checkin-modal btn btn-outline-primary" data-toggle="modal" data-target="#checkinModal">
-                Đăng ký ca dạy
+                Chấm công
             </div>
         </div>
         <div class="timelog-body">

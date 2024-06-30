@@ -4,7 +4,7 @@
         @csrf
         <div class="modal-content" style="width:800px">
             <div class="modal-header">
-                <h5 class="modal-title" id="checkinModalLabel">Đăng ký ca dạy</h5>
+                <h5 class="modal-title" id="checkinModalLabel">Chấm công</h5>
 
             </div>
             <div class="modal-body">

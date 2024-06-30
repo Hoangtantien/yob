@@ -246,7 +246,8 @@
     font-weight: 700;
     cursor: pointer;
 }
-#timelog-section {
+#timelog-section,
+#statistic-section {
     width: 80%;
     max-width: 1100px;
     background-color: #fff;
@@ -255,7 +256,8 @@
     margin: 40px auto;
     border-radius: 10px;
 }
-.timelog-header, .timelog-body-header {
+.timelog-header,
+.timelog-body-header {
     font-size: 18px;
 }
 .filer-wrap {
@@ -268,7 +270,7 @@
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
-.date-filter{
+.date-filter {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -278,11 +280,11 @@
     max-width: 300px;
 }
 
-#checkinModal .input-group-text{
-    border-top-right-radius: 0px ;
-    border-bottom-right-radius: 0px ;
+#checkinModal .input-group-text {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
-.list-date-table table thead th{
+.list-date-table table thead th {
     font-weight: 400;
     padding-left: 25px !important;
     padding-right: 25px !important;
@@ -292,12 +294,11 @@
     color: #ffffff;
     background-color: #f5922f;
     border-right: 1px solid #d3d3d3;
-
 }
-.timelog-list{
+.timelog-list {
     margin-top: 20px;
 }
-.list-date-table table tbody tr td{
+.list-date-table table tbody tr td {
     padding: 30px 25px;
     font-size: 14px;
     font-weight: 500;
@@ -305,23 +306,22 @@
     color: #5b6e88;
     text-align: center;
     border-right: 1px solid #d3d3d3;
-
 }
-.list-date-table table thead th span{
+.list-date-table table thead th span {
     white-space: nowrap;
 }
-.list_short-session-table{
-    flex: 0 0  170px;
+.list_short-session-table {
+    flex: 0 0 170px;
     border-right: 1px solid #d3d3d3;
 }
-.list_short-session-table .list_short-session-header{
+.list_short-session-table .list_short-session-header {
     padding-top: 8px !important;
     padding-bottom: 8px !important;
     color: #ffffff;
     text-align: center;
     background-color: #f5922f;
 }
-.list_short-session-table .list_short-session-item{
+.list_short-session-table .list_short-session-item {
     padding: 18.8px 25px;
     font-size: 14px;
     vertical-align: middle;
@@ -329,6 +329,24 @@
     border-bottom: 1px solid #dee2e6;
     text-align: center;
 }
-.active-timelog{
+.active-timelog {
     background-color: #ffca00 !important;
+}
+.btn-primary{
+    background-color: #f5922f !important;
+    border-color: #f5922f !important;
+}
+
+.btn-outline-primary{
+    color: #f5922f !important;
+    border-color: #f5922f !important;
+}
+.btn-outline-primary:hover{
+    background-color: #f5922f !important;
+    color: #fff !important;
+
+}
+.btn-danger{
+    background-color: #6e6e6e;
+    border-color: #6e6e6e;
 }

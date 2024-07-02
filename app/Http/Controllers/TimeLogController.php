@@ -184,7 +184,7 @@ class TimeLogController extends Controller
             // $endTime = \Carbon\Carbon::parse($shortSession->end_time, 'Asia/Ho_Chi_Minh');
 
             // fake data
-            $currentDateTime = \Carbon\Carbon::create(2024, 1, 4, 17, 0, 0, 'Asia/Ho_Chi_Minh');
+            $currentDateTime = \Carbon\Carbon::create(2024, 5, 30, 7, 0, 0, 'Asia/Ho_Chi_Minh');
             $startTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
             $endTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->end_time, 'Asia/Ho_Chi_Minh');
             // fake data
@@ -198,7 +198,7 @@ class TimeLogController extends Controller
                 ->first();
 
             if ($existingCheckin) {
-                return redirect()->back()->with('error', 'Bạn đã đăng ký cho ca học này hôm nay');
+                return redirect()->back()->with('error', 'Bạn đã chấm công cho ca học này hôm nay');
             }
             // Check if current time is between start time and end time
             if ($currentDateTime->between($startTime, $endTime)) {
@@ -209,9 +209,9 @@ class TimeLogController extends Controller
                     'date' => $todayDate,
                 ]);
 
-                return redirect()->back()->with('success', 'Đăng ký ca dạy thành công');
+                return redirect()->back()->with('success', 'Chấm công ca dạy thành công');
             } else {
-                return redirect()->back()->with('error', 'Thời điểm hiện tại không trùng với ca đăng ký');
+                return redirect()->back()->with('error', 'Thời điểm hiện tại không trùng với ca chấm công');
             }
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'Session not found');

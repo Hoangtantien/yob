@@ -124,9 +124,13 @@ class UserController extends Controller
         $user = User::find($id);
 
         if ($user) {
+            $user->timelogs()->delete();
+            $user->salaries()->delete();
             $user->classes()->detach();
             $user->achievements()->detach();
             $user->delete();
+
+
             return redirect()->route('user.list')->with('success', 'Người dùng đã được xóa thành công.');
         }
         return redirect()->route('user.list')->with('error', 'Người dùng không tồn tại.');

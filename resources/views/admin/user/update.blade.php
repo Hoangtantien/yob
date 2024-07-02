@@ -7,7 +7,7 @@
         </h5>
         <div class="mb-3 row">
             <div class="col-6">
-                <label for="exampleInputEmail1" class="form-label">Email address <span class="required">*</span></label>
+                <label for="exampleInputEmail1" class="form-label">Email  <span class="required">*</span></label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                     name="email" value="{{ $user->email }}">
             </div>

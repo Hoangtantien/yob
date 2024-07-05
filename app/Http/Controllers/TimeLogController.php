@@ -184,7 +184,7 @@ class TimeLogController extends Controller
             // $endTime = \Carbon\Carbon::parse($shortSession->end_time, 'Asia/Ho_Chi_Minh');
 
             // fake data
-            $currentDateTime = \Carbon\Carbon::create(2024, 5, 30, 7, 0, 0, 'Asia/Ho_Chi_Minh');
+            $currentDateTime = \Carbon\Carbon::create(2024, 5, 30, 20, 0, 0, 'Asia/Ho_Chi_Minh');
             $startTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->start_time, 'Asia/Ho_Chi_Minh')->subMinutes(15);
             $endTime = \Carbon\Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $shortSession->end_time, 'Asia/Ho_Chi_Minh');
             // fake data

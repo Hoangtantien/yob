@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Youth of Basketball</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.webp') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

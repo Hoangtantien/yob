@@ -1,6 +1,6 @@
 <div class="side_bar-header">
     <a href="/">
-        <img src="{{ asset('images/logo1.jpg') }}" alt="" class ="logo">
+        <img src="{{ asset('images/logo1.png') }}" alt="" class ="logo">
 
     </a>
 </div>

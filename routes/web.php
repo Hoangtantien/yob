@@ -102,3 +102,4 @@ Route::get('/timelog/detail/{id}/{month}', [App\Http\Controllers\TimeLogControll
 Route::get('/salary/create/', [App\Http\Controllers\SalaryController::class, 'create'])->name('salary.create');
 Route::post('/salary/create/', [App\Http\Controllers\SalaryController::class, 'store'])->name('salary.store');
 Route::get('/salary/statistic/', [App\Http\Controllers\SalaryController::class, 'statistic'])->name('salary.statistic');
+Route::get('/salary/list/{id}', [App\Http\Controllers\SalaryController::class, 'userList'])->name('salary.list');

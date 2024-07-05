@@ -23,6 +23,10 @@ class Salary extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
     public static function hasSalaryRecords($userId, $month = null, $year = null)
     {
         $query = self::where('user_id', $userId);

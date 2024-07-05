@@ -61,11 +61,12 @@ class SalaryController extends Controller
         return redirect()->back()->with('success', 'Salaries have been generated successfully.');
     }
 
-    public function statistic(Request $request){
-        
+    public function statistic(Request $request)
+    {
+
         $currentYear = $request->get('selected_year') ? $request->get('selected_year') : date('Y');
         $months = [];
-        $users = User::where('type',2)->get();
+        $users = User::where('type', 2)->get();
         $selectedMonth = $request->input('selected_month', null);
         $startMonth = $selectedMonth ?: 1;
         $endMonth = $selectedMonth ?: 12;
@@ -80,7 +81,7 @@ class SalaryController extends Controller
         $data['months'] = $months;
         $data['users'] = $users;
         $data['year'] = $currentYear;
-        return view('page.salary.statistic',$data);
+        return view('page.salary.statistic', $data);
     }
 
 
@@ -102,5 +103,30 @@ class SalaryController extends Controller
         ];
 
         return $translations[$englishMonth] ?? $englishMonth;
+    }
+
+    public function userList(Request $request, $id)
+    {
+        $perPage = $request->input('per_page', 5); 
+        $salaries = Salary::getSalaryByUserId($id, null, null, $perPage);
+        $vietnameseMonths = [
+            1 => 'Tháng 1',
+            2 => 'Tháng 2',
+            3 => 'Tháng 3',
+            4 => 'Tháng 4',
+            5 => 'Tháng 5',
+            6 => 'Tháng 6',
+            7 => 'Tháng 7',
+            8 => 'Tháng 8',
+            9 => 'Tháng 9',
+            10 => 'Tháng 10',
+            11 => 'Tháng 11',
+            12 => 'Tháng 12',
+        ];
+        return view('page.salary.user-list', [
+            'salaries' => $salaries,
+            'vietnameseMonths' => $vietnameseMonths,
+        ]);
+    
     }
 }

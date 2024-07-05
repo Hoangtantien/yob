@@ -106,7 +106,7 @@
                             @foreach ($users as $user)
                                 <tr>
                                     @foreach ($months as $month)
-                                        <td class="">
+                                        <td class="salary-item">
                                             <?php
                                         $has_salary = Salary::hasSalaryRecords($user->id, $month['number'], $month['year']);
                                         if($has_salary){

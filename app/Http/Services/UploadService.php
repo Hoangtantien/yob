@@ -11,9 +11,10 @@ class UploadService
                 $name = $request->file('file')->getClientOriginalName();
                 $pathFull = 'uploads/' . date("Y/m/d");
                 $request->file('file')->storeAs('public/' . $pathFull, $name);
-                return '/storage/' . $pathFull . '/' . $name;
+                return '/storage/' . $pathFull . '/' . $name; 
             }
         } catch (\Exception $e) {
+            dd($e); 
             return false;
         }
     }

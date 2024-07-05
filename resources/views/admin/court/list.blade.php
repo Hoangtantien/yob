@@ -6,7 +6,7 @@
         <div class="container cs-container">
             <div class="box-header">
                 <div class="box-header-left">
-                    <h5>Danh sách sân bóng rổ</h5>
+                    <h5>DANH SÁCH SÂN BÓNG RỔ</h5>
                     <a href="{{ route('court.create') }}" class="btn btn-outline-primary">Thêm</a>
                 </div>
                 <form class="box-header-right">

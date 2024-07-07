@@ -81,6 +81,7 @@
     min-width: 170px;
     top: 63px;
     text-align: end;
+    z-index: 9999;
 }
 .user-control-menu a {
     text-decoration: none;
@@ -332,31 +333,43 @@
 .active-timelog {
     background-color: #ffca00 !important;
 }
-.btn-primary{
+.btn-primary {
     background-color: #f5922f !important;
     border-color: #f5922f !important;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
     color: #f5922f !important;
     border-color: #f5922f !important;
 }
-.btn-outline-primary:hover{
+.btn-outline-primary:hover {
     background-color: #f5922f !important;
     color: #fff !important;
-
 }
-.btn-danger{
+.btn-danger {
     background-color: #6e6e6e;
     border-color: #6e6e6e;
 }
-.btn-danger:hover{
+.btn-danger:hover {
     background-color: #6e6e6e !important;
     border-color: #6e6e6e !important;
-
 }
-.salary-item:hover{
+.salary-item:hover {
     background-color: #f5922f !important;
     color: #fff !important;
     cursor: pointer;
+}
+.home-section .card {
+    text-decoration: none;
+}
+
+.home-section .card-body {
+    font-size: 35px;
+    color: #ffff;
+    font-weight: 600;
+    background-image: linear-gradient(to top, #ffd194, #f5922f);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

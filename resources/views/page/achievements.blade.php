@@ -26,6 +26,7 @@
                         <th scope="col">Tên thành tích</th>
                         <th scope="col">Mô tả</th>
                         <th scope="col">Ngày đạt thành tích</th>
+                        <th scope="col">Số lương được tăng</th>
                     </tr>
                 </thead>
                 @foreach ($achievements as $index => $achievement)
@@ -34,6 +35,7 @@
                         <td>{{ $achievement->name }}</td>
                         <td>{{ $achievement->description }}</td>
                         <td>{{ $achievement->pivot->date_achieved ? \Carbon\Carbon::parse($achievement->pivot->date_achieved)->format('d/m/Y') : 'N/A' }}</td>
+                        <td class="text-center">{{ $achievement->raise_salary == 1 ? showPrice(50000) : 0 }}</td>
 
                     </tr>
                 @endforeach

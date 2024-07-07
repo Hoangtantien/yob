@@ -68,7 +68,7 @@
                                 Lọc
                             </button>
                             <div class="btn btn-success export-statistic" type="button" id="button-addon1"
-                                style="height:40px; width: 130px; margin-top: 28px;">
+                                style="height:40px; width: 130px; margin-top: 28px;" data-url="{{ route('salary.export') }}">
                                 Xuất excel
                             </div>
                         </div>

@@ -69,4 +69,31 @@ $(document).ready(function () {
             }
         });
     })
+    $(".export-statistic").on("click",function(){
+        var url = $(this).data("url");
+        var selected_month = $("#selected_month").val();
+        var selected_year = $("#selected_year").val();
+        var token = $('meta[name="csrf-token"]').attr('content'); // Lấy CSRF token
+
+        $.ajax({
+            url:url,
+            type: "post",
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            data:{
+                selected_month : selected_month,
+                selected_year : selected_year,
+            },
+            success:function(response){
+                console.log(response)
+                window.location.href = response.url;
+            },
+            error: function(xhr) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
+        })
+    })
+
 });

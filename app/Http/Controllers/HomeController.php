@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Achievement;
+use App\Models\Court;
+use App\Models\ProjectClass;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +29,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        if ($user->type == 2) {
+            
+            return view('home-user');
+        }
+    
+        $coaches = User::where('type', 2)->count();
+        $students = Student::count();
+        $classes = ProjectClass::count();
+        $achievements = Achievement::count();
+        $court = Court::count();
+        return view(
+            'home',
+            [
+                'coaches' => $coaches,
+                'students' => $students,
+                'classes' => $classes,
+                'achievements' => $achievements,
+                'court' => $court,
+            ]
+        );
     }
 }

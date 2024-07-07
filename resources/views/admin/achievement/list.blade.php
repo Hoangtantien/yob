@@ -9,7 +9,7 @@
                     <a href="{{ route('achievement.create') }}" class="btn btn-outline-primary">Thêm</a>
                 </div>
                 <form class="box-header-right">
-                    <input type="text" class="form-control" placeholder="Nhập tên học sinh" name="search">
+                    <input type="text" class="form-control" placeholder="Nhập tên thành tích" name="search">
                     <button class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Shuchkin\SimpleXLSXGen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Salary;
@@ -107,7 +107,7 @@ class SalaryController extends Controller
 
     public function userList(Request $request, $id)
     {
-        $perPage = $request->input('per_page', 5); 
+        $perPage = $request->input('per_page', 5);
         $salaries = Salary::getSalaryByUserId($id, null, null, $perPage);
         $vietnameseMonths = [
             1 => 'Tháng 1',
@@ -127,6 +127,59 @@ class SalaryController extends Controller
             'salaries' => $salaries,
             'vietnameseMonths' => $vietnameseMonths,
         ]);
-    
+    }
+
+
+    public function exportStatisticToExcelAjax(Request $request)
+    {
+        $currentYear = $request->post('selected_year') ? $request->post('selected_year') : date('Y');
+        $selectedMonth = $request->post('selected_month', null);
+        $startMonth = $selectedMonth ?: 1;
+        $endMonth = $selectedMonth ?: 12;
+        $months = [];
+        $users = User::where('type', 2)->get();
+        for ($i = $startMonth; $i <= $endMonth; $i++) {
+            $months[] = [
+                'number' => $i,
+                'name' => $this->translateMonth($i),
+                'year' => $currentYear,
+            ];
+        }
+
+        $header = ['Huấn luyện viên/Tháng'];
+        foreach ($months as $month) {
+            $header[] = $month['name'];
+        }
+        $data = [];
+        $data[] = $header;
+
+        foreach ($users as $user) {
+            $row = [$user->name];
+            foreach ($months as $month) {
+                $has_salary = Salary::hasSalaryRecords($user->id, $month['number'], $month['year']);
+                if ($has_salary) {
+                    $salary = Salary::getSalaryByUserId($user->id, $month['number'], $month['year'], null);
+                    if ($salary->isNotEmpty()) {
+                        $salary_number = $salary[0]->calculated_salary;
+                        $salary_format = number_format($salary_number, 0, ',', '.');
+                        $row[] = $salary_format;
+                    } else {
+                        $row[] = 0;
+                    }
+                } else {
+                    $row[] = 0;
+                }
+            }
+            $data[] = $row;
+        }
+
+        // Sử dụng SimpleXLSXGen để tạo và lưu file Excel
+        $xlsx = SimpleXLSXGen::fromArray($data);
+        $filePath = 'exports/Thong_ke_luong_' . $currentYear . '.xlsx';
+        $xlsx->saveAs(storage_path('app/public/' . $filePath));
+
+        $url = asset('storage/' . $filePath);
+
+        return response()->json(['url' => $url]);
     }
 }

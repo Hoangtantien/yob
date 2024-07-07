@@ -103,3 +103,4 @@ Route::get('/salary/create/', [App\Http\Controllers\SalaryController::class, 'cr
 Route::post('/salary/create/', [App\Http\Controllers\SalaryController::class, 'store'])->name('salary.store');
 Route::get('/salary/statistic/', [App\Http\Controllers\SalaryController::class, 'statistic'])->name('salary.statistic');
 Route::get('/salary/list/{id}', [App\Http\Controllers\SalaryController::class, 'userList'])->name('salary.list');
+Route::post('/salary/export', [App\Http\Controllers\SalaryController::class, 'exportStatisticToExcelAjax'])->name('salary.export');

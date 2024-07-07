@@ -87,4 +87,14 @@ class StudentController extends Controller
         $data['search'] = $search;
         return view('admin.students.list', $data);
     }
+    public function delete(Request $request, $id){
+        $student = Student::findOrFail($id);
+        if($student){
+            $student->classes()->detach() ;
+            $student->delete();
+            return redirect()->route('students.list')->with('success', 'Học sinh đã được xóa thành công.');
+        }
+        return redirect()->route('students.list')->with('error', 'Học sinh không tồn tại.');
+
+    }
 }
